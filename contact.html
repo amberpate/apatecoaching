@@ -386,6 +386,7 @@ async function handleSubmit(e){
     const data=new FormData(form);
     const res=await fetch('https://formspree.io/f/xwvzknja',{method:'POST',body:data,headers:{'Accept':'application/json'}});
     if(res.ok){
+      gtag('event','generate_lead',{service:data.get('service')});
       gtag('event','conversion',{'send_to':'AW-18171110497/ZxK3CKCMiK8cEOHI1NhD'});
       form.innerHTML='<p style="color:var(--off-white);font-family:\'Barlow Condensed\',sans-serif;font-size:1.4rem;letter-spacing:0.05em;padding:2rem 0;">✓ Message sent — I\'ll be in touch soon.</p>';
     } else {
