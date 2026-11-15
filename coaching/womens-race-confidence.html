@@ -21,6 +21,18 @@
   gtag('js', new Date());
   gtag('config', 'G-2DVNHBLD43');
   gtag('config', 'AW-18171110497');
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    const link = target instanceof Element
+      ? target.closest('a[data-ga-event], button[data-ga-event]')
+      : null;
+    if (!link || typeof gtag !== 'function') return;
+    const params = { transport_type: 'beacon' };
+    if (link.dataset.pathway) params.pathway = link.dataset.pathway;
+    if (link.dataset.program) params.program = link.dataset.program;
+    if (link.dataset.location) params.location = link.dataset.location;
+    gtag('event', link.dataset.gaEvent, params);
+  });
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -312,7 +324,7 @@ h2{font-weight:700}
     <li><a href="junior-u23-development.html">Junior & U23</a></li>
     <li><a href="cycling-coaching.html">Cycling Coaching</a></li>
     <li><a href="../contact.html">Contact</a></li>
-    <li><a href="../contact.html" class="nav-cta">Book a free consult</a></li>
+    <li><a href="../contact.html" class="nav-cta" data-ga-event="consult_click" data-location="header">Book a free consult</a></li>
   </ul>
   <button class="hamburger" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" onclick="openMenu()">
     <span></span><span></span><span></span>
@@ -326,7 +338,7 @@ h2{font-weight:700}
     <a href="junior-u23-development.html" onclick="closeMenu()">Junior & U23</a>
     <a href="cycling-coaching.html" onclick="closeMenu()">Cycling Coaching</a>
     <a href="../contact.html" onclick="closeMenu()">Contact</a>
-    <a href="../contact.html" onclick="closeMenu()" style="background:var(--off-white);color:var(--black);padding:0.6rem 2rem;font-weight:600">Book a free consult</a>
+    <a href="../contact.html" onclick="closeMenu()" style="background:var(--off-white);color:var(--black);padding:0.6rem 2rem;font-weight:600" data-ga-event="consult_click" data-location="header">Book a free consult</a>
 </div>
 <div style="padding-top:80px">
 
@@ -337,7 +349,7 @@ h2{font-weight:700}
     <p class="hero-headline-sub" style="margin-top:1rem">For women who ride regularly and want to start — or progress — in racing.</p>
     <p style="color:var(--light);font-size:0.92rem;line-height:1.85;max-width:620px;margin-top:1rem">Lots of women are strong enough to race — they just haven't had the right environment to develop the bunch skills, tactics and race knowledge to give it a go. This program is built to give you exactly that, in a supportive, structured way.</p>
     <div style="display:flex;gap:0.8rem;margin-top:2rem;flex-wrap:wrap">
-      <a href="../contact.html" class="btn-p">Book a free consult</a>
+      <a href="../contact.html" class="btn-p" data-ga-event="consult_click" data-location="womens_page">Book a free consult</a>
       <a href="#program" class="btn-g">See the Program</a>
     </div>
   </div>
@@ -360,7 +372,7 @@ h2{font-weight:700}
       <div style="margin-top:2rem;border:1px solid var(--border);padding:1.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:2.5rem;color:var(--off-white)">$60</div>
         <div style="font-size:0.7rem;letter-spacing:0.14em;color:var(--mid);text-transform:uppercase;margin-bottom:1rem">Per week · Full coaching</div>
-        <a href="../contact.html" class="btn-p">Book a free consult</a>
+        <a href="../contact.html" class="btn-p" data-ga-event="consult_click" data-location="womens_page">Book a free consult</a>
       </div>
     </div>
     <div>
@@ -413,7 +425,7 @@ h2{font-weight:700}
               <div style="border-left:2px solid var(--gold);padding-left:1rem;font-size:0.85rem;color:var(--light);line-height:1.7">Work and life mean you can't train every day — you want quality over quantity</div>
             </div>
             <div style="margin-top:1.8rem">
-              <a href="../contact.html" class="btn-p">Book a free consult</a>
+              <a href="../contact.html" class="btn-p" data-ga-event="consult_click" data-location="womens_page">Book a free consult</a>
             </div>
           </div>
         </div>
@@ -441,7 +453,7 @@ h2{font-weight:700}
               <div style="border-left:2px solid var(--gold);padding-left:1rem;font-size:0.85rem;color:var(--light);line-height:1.7">You want race knowledge from someone who races at the top level — right now</div>
             </div>
             <div style="margin-top:1.8rem">
-              <a href="../contact.html" class="btn-p">Book a free consult</a>
+              <a href="../contact.html" class="btn-p" data-ga-event="consult_click" data-location="womens_page">Book a free consult</a>
             </div>
           </div>
         </div>

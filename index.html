@@ -21,6 +21,18 @@
   gtag('js', new Date());
   gtag('config', 'G-2DVNHBLD43');
   gtag('config', 'AW-18171110497');
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    const link = target instanceof Element
+      ? target.closest('a[data-ga-event], button[data-ga-event]')
+      : null;
+    if (!link || typeof gtag !== 'function') return;
+    const params = { transport_type: 'beacon' };
+    if (link.dataset.pathway) params.pathway = link.dataset.pathway;
+    if (link.dataset.program) params.program = link.dataset.program;
+    if (link.dataset.location) params.location = link.dataset.location;
+    gtag('event', link.dataset.gaEvent, params);
+  });
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -304,7 +316,7 @@ h2{font-weight:700}
     <li><a href="coaching/junior-u23-development.html">Junior & U23</a></li>
     <li><a href="coaching/cycling-coaching.html">Cycling Coaching</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Book a free consult</a></li>
+    <li><a href="contact.html" class="nav-cta" data-ga-event="consult_click" data-location="header">Book a free consult</a></li>
   </ul>
   <button class="hamburger" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" onclick="openMenu()">
     <span></span><span></span><span></span>
@@ -318,7 +330,7 @@ h2{font-weight:700}
     <a href="coaching/junior-u23-development.html" onclick="closeMenu()">Junior & U23</a>
     <a href="coaching/cycling-coaching.html" onclick="closeMenu()">Cycling Coaching</a>
     <a href="contact.html" onclick="closeMenu()">Contact</a>
-    <a href="contact.html" onclick="closeMenu()" style="background:var(--off-white);color:var(--black);padding:0.6rem 2rem;font-weight:600">Book a free consult</a>
+    <a href="contact.html" onclick="closeMenu()" style="background:var(--off-white);color:var(--black);padding:0.6rem 2rem;font-weight:600" data-ga-event="consult_click" data-location="header">Book a free consult</a>
 </div>
 <div class="hero">
   <div class="hero-left">
@@ -328,10 +340,10 @@ h2{font-weight:700}
     <p class="hero-body">Women gain the skills, tactics and belief to start and progress in racing. Young riders get individualised plans that build performance without overtraining — so they stay healthy and stay in the sport.</p>
     <div class="hero-actions" style="flex-direction:column;align-items:flex-start;gap:0.6rem;margin-bottom:0.5rem">
       <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
-        <a href="coaching/womens-race-confidence.html" class="btn-p" style="font-size:0.63rem">I want to start racing →</a>
-        <a href="coaching/junior-u23-development.html" class="btn-g" style="font-size:0.63rem">I'm a young rider / parent →</a>
+        <a href="coaching/womens-race-confidence.html" class="btn-p" style="font-size:0.63rem" data-ga-event="select_pathway" data-pathway="womens_racing">I want to start racing →</a>
+        <a href="coaching/junior-u23-development.html" class="btn-g" style="font-size:0.63rem" data-ga-event="select_pathway" data-pathway="junior_u23">I'm a young rider / parent →</a>
       </div>
-      <a href="contact.html" style="display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:0.63rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--off-white);text-decoration:none;margin-top:0.3rem;border:1px solid var(--border);padding:0.45rem 1.1rem;">Book a free consult</a>
+      <a href="contact.html" style="display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:0.63rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--off-white);text-decoration:none;margin-top:0.3rem;border:1px solid var(--border);padding:0.45rem 1.1rem;" data-ga-event="consult_click" data-location="hero">Book a free consult</a>
       <span class="consult-note">30 minutes · no obligation</span>
     </div>
   </div>
@@ -365,7 +377,7 @@ h2{font-weight:700}
       <h3 class="svc-title">Develop with<br>Confidence</h3>
       <p class="svc-price">$60 / week · Full coaching</p>
       <p class="svc-desc">For women who ride regularly and want to start or progress in racing. Gain the bunch skills, tactics and race-day confidence to enter your first crit — then keep moving up through the grades.</p>
-      <a href="coaching/womens-race-confidence.html" class="svc-link">Explore women's coaching</a>
+      <a href="coaching/womens-race-confidence.html" class="svc-link" data-ga-event="select_program" data-program="womens">Explore women's coaching</a>
     </div>
     <div class="svc-card fade-up">
       <div class="svc-n">02</div>
@@ -373,7 +385,7 @@ h2{font-weight:700}
       <h3 class="svc-title">Junior &amp; U23<br>Development</h3>
       <p class="svc-price">$60 / week · Full coaching</p>
       <p class="svc-desc">Age-appropriate, individualised programs for riders aged 15–U23. Built around school life — not against it. Training loads aligned with AIS guidelines so young riders stay healthy and stay in the sport.</p>
-      <a href="coaching/junior-u23-development.html" class="svc-link">Explore junior &amp; U23 coaching</a>
+      <a href="coaching/junior-u23-development.html" class="svc-link" data-ga-event="select_program" data-program="junior_u23">Explore junior &amp; U23 coaching</a>
     </div>
     <div class="svc-card fade-up">
       <div class="svc-n">03</div>
@@ -381,7 +393,7 @@ h2{font-weight:700}
       <h3 class="svc-title">Cycling<br>Coaching</h3>
       <p class="svc-price">$75 / week · Full coaching</p>
       <p class="svc-desc">Structured training for road cyclists of all levels. Build fitness, improve power, and peak for your target events — individualised around your schedule.</p>
-      <a href="coaching/cycling-coaching.html" class="svc-link">Explore cycling coaching</a>
+      <a href="coaching/cycling-coaching.html" class="svc-link" data-ga-event="select_program" data-program="cycling">Explore cycling coaching</a>
     </div>
     <div class="svc-card fade-up">
       <div class="svc-n">04</div>

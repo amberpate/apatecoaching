@@ -21,6 +21,18 @@
   gtag('js', new Date());
   gtag('config', 'G-2DVNHBLD43');
   gtag('config', 'AW-18171110497');
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    const link = target instanceof Element
+      ? target.closest('a[data-ga-event], button[data-ga-event]')
+      : null;
+    if (!link || typeof gtag !== 'function') return;
+    const params = { transport_type: 'beacon' };
+    if (link.dataset.pathway) params.pathway = link.dataset.pathway;
+    if (link.dataset.program) params.program = link.dataset.program;
+    if (link.dataset.location) params.location = link.dataset.location;
+    gtag('event', link.dataset.gaEvent, params);
+  });
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -303,7 +315,7 @@ h2{font-weight:700}
     <li><a href="junior-u23-development.html">Junior & U23</a></li>
     <li><a href="cycling-coaching.html" style="color:var(--off-white)">Cycling Coaching</a></li>
     <li><a href="../contact.html">Contact</a></li>
-    <li><a href="../contact.html" class="nav-cta">Book a free consult</a></li>
+    <li><a href="../contact.html" class="nav-cta" data-ga-event="consult_click" data-location="header">Book a free consult</a></li>
   </ul>
   <button class="hamburger" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" onclick="openMenu()">
     <span></span><span></span><span></span>
@@ -317,7 +329,7 @@ h2{font-weight:700}
     <a href="junior-u23-development.html" onclick="closeMenu()">Junior & U23</a>
     <a href="cycling-coaching.html" onclick="closeMenu()">Cycling Coaching</a>
     <a href="../contact.html" onclick="closeMenu()">Contact</a>
-    <a href="../contact.html" onclick="closeMenu()" style="background:var(--off-white);color:var(--black);padding:0.6rem 2rem;font-weight:600">Book a free consult</a>
+    <a href="../contact.html" onclick="closeMenu()" style="background:var(--off-white);color:var(--black);padding:0.6rem 2rem;font-weight:600" data-ga-event="consult_click" data-location="header">Book a free consult</a>
 </div>
 <div style="padding-top:80px">
 
@@ -328,7 +340,7 @@ h2{font-weight:700}
     <p class="hero-headline-sub" style="margin-top:1rem">Personalised road cycling programs for all levels — built around your goals, schedule and available training time.</p>
     <p style="color:var(--light);font-size:0.92rem;line-height:1.85;max-width:620px;margin-top:1rem">Whether you're training for your first gran fondo, targeting a podium, or just want to get fitter on the bike — programs are built from scratch around you, not a generic 12-week plan off the internet.</p>
     <div style="display:flex;gap:0.8rem;margin-top:2rem;flex-wrap:wrap">
-      <a href="../contact.html" class="btn-p">Book a free consult</a>
+      <a href="../contact.html" class="btn-p" data-ga-event="consult_click" data-location="cycling_page">Book a free consult</a>
       <a href="#included" class="btn-g">What's Included ↓</a>
     </div>
   </div>
@@ -351,7 +363,7 @@ h2{font-weight:700}
       <div style="margin-top:2rem;border:1px solid var(--border);padding:1.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:2.5rem;color:var(--off-white)">$75</div>
         <div style="font-size:0.7rem;letter-spacing:0.14em;color:var(--mid);text-transform:uppercase;margin-bottom:1rem">Per week · Full coaching</div>
-        <a href="../contact.html" class="btn-p">Book a free consult</a>
+        <a href="../contact.html" class="btn-p" data-ga-event="consult_click" data-location="cycling_page">Book a free consult</a>
       </div>
     </div>
     <div>
