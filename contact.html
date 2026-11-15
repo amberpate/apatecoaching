@@ -31,7 +31,7 @@
 :root{
   --black:#080808;
   --off-white:#f0ede8;
-  --mid:#6e6e6e;
+  --mid:#7a7a7a;
   --light:#b8b4ae;
   --border:rgba(240,237,232,0.1);
   --border-mid:rgba(240,237,232,0.18);
@@ -53,12 +53,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .nav-cta{background:var(--gold)!important;color:var(--black)!important;padding:0.42rem 1.1rem;font-weight:600!important}
 .nav-cta:hover{background:var(--gold-light)!important}
 .nav-desktop{display:flex}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;border:0;background:transparent;color:inherit}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--off-white);transition:all 0.3s}
 .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,8,8,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
 .mobile-menu.open{display:flex}
 .mobile-menu a{color:var(--off-white);text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:2rem;letter-spacing:0.06em;text-transform:uppercase}
-.mobile-close{position:absolute;top:1.2rem;right:var(--pad);font-size:1.8rem;cursor:pointer;color:var(--mid)}
+.mobile-close{position:absolute;top:1.2rem;right:var(--pad);font-size:1.8rem;cursor:pointer;color:var(--mid);padding:0;border:0;background:transparent;font-family:inherit;line-height:1}
 
 /* HERO */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:60px;overflow:hidden}
@@ -187,21 +187,23 @@ h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(2.2
 /* CONTACT */
 .contact-section{background:var(--off-white);color:var(--black);border-top:1px solid #ccc}
 .contact-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem}
-.contact-left .sec-label{color:#999}
+.contact-left .sec-label{color:#6a6a6a}
 .contact-left .sec-label::before{background:#999}
 .contact-left h2{color:var(--black)}
 .contact-left p{color:#555;font-size:0.88rem;line-height:1.8;margin-top:1.3rem;margin-bottom:1.6rem}
 .cd{margin-bottom:0.75rem}
-.cdl{font-family:'Barlow Condensed',sans-serif;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:0.1rem}
+.cdl{font-family:'Barlow Condensed',sans-serif;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:#6a6a6a;margin-bottom:0.1rem}
 .cdv{font-size:0.86rem;color:var(--black)}
 .cdv a{color:inherit;text-decoration:none}
 .cdv a:hover{text-decoration:underline}
 .cform{display:flex;flex-direction:column;gap:1rem}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .fg{display:flex;flex-direction:column;gap:0.3rem}
-.fg label{font-family:'Barlow Condensed',sans-serif;font-size:0.56rem;letter-spacing:0.18em;text-transform:uppercase;color:#888}
-.fg input,.fg select,.fg textarea{background:transparent;border:none;border-bottom:1px solid #c0bbb5;padding:0.5rem 0;font-family:'Barlow',sans-serif;font-size:0.86rem;color:var(--black);outline:none;transition:border-color 0.2s;-webkit-appearance:none;border-radius:0}
+.fg label{font-family:'Barlow Condensed',sans-serif;font-size:0.56rem;letter-spacing:0.18em;text-transform:uppercase;color:#6a6a6a}
+.fg input,.fg select,.fg textarea{background:transparent;border:none;border-bottom:1px solid #c0bbb5;padding:0.5rem 0;font-family:'Barlow',sans-serif;font-size:0.86rem;color:var(--black);outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;border-radius:0}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-bottom-color:var(--black)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--off-white);outline-offset:3px}
+.contact-section a:focus-visible,.contact-section button:focus-visible,.contact-section input:focus-visible,.contact-section select:focus-visible,.contact-section textarea:focus-visible{outline-color:var(--black)}
 .fg textarea{resize:none;height:70px}
 .fg select{cursor:pointer;background:transparent}
 .submit-btn{background:var(--gold);color:var(--black);border:none;padding:0.85rem 2rem;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.17em;text-transform:uppercase;cursor:pointer;align-self:flex-start;transition:background 0.2s}
@@ -301,21 +303,21 @@ h2{font-weight:700}
     <li><a href="coaching/junior-u23-development.html">Junior & U23</a></li>
     <li><a href="coaching/cycling-coaching.html">Cycling Coaching</a></li>
     <li><a href="contact.html" style="color:var(--off-white)">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Book Free Consult</a></li>
+    <li><a href="contact.html" class="nav-cta">Book a free consult</a></li>
   </ul>
-  <div class="hamburger" onclick="openMenu()" aria-label="Open menu">
+  <button class="hamburger" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" onclick="openMenu()">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <span class="mobile-close" onclick="closeMenu()">✕</span>
+  <button class="mobile-close" id="menuClose" type="button" aria-label="Close menu" aria-expanded="false" aria-controls="mobileMenu" onclick="closeMenu()">✕</button>
   <a href="index.html" onclick="closeMenu()">Home</a>
     <a href="about.html" onclick="closeMenu()">About</a>
     <a href="coaching/womens-race-confidence.html" onclick="closeMenu()">Develop with Confidence</a>
     <a href="coaching/junior-u23-development.html" onclick="closeMenu()">Junior & U23</a>
     <a href="coaching/cycling-coaching.html" onclick="closeMenu()">Cycling Coaching</a>
     <a href="contact.html" onclick="closeMenu()">Contact</a>
-    <a href="contact.html" onclick="closeMenu()" style="background:var(--off-white);color:var(--black);padding:0.6rem 2rem;font-weight:600">Book Free Consult</a>
+    <a href="contact.html" onclick="closeMenu()" style="background:var(--off-white);color:var(--black);padding:0.6rem 2rem;font-weight:600">Book a free consult</a>
 </div>
 <div style="padding-top:80px">
 <section style="background:#0a0a0a;border-bottom:1px solid var(--border);padding:3rem var(--pad) 2.5rem">
@@ -371,8 +373,8 @@ h2{font-weight:700}
   </ul>
 </footer>
 <script>
-function openMenu(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden'}
-function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow=''}
+function openMenu(){document.getElementById('mobileMenu').classList.add('open');document.getElementById('menuToggle').setAttribute('aria-expanded','true');document.getElementById('menuClose').setAttribute('aria-expanded','true');document.body.style.overflow='hidden'}
+function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('menuToggle').setAttribute('aria-expanded','false');document.getElementById('menuClose').setAttribute('aria-expanded','false');document.body.style.overflow=''}
 function switchTab(btn,id){document.querySelectorAll('.wtab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.wtab-panel').forEach(p=>p.style.display='none');const el=document.getElementById('wtab-'+id);if(el)el.style.display='block';}
 const obs=new IntersectionObserver((entries)=>{entries.forEach((e)=>{if(e.isIntersecting){const s=Array.from(e.target.parentNode.children);e.target.style.transitionDelay=(s.indexOf(e.target)%4*0.08)+'s';e.target.classList.add('in');obs.unobserve(e.target)}});},{threshold:0.08});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
