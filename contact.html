@@ -198,11 +198,15 @@ h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(2.2
 
 /* CONTACT */
 .contact-section{background:var(--off-white);color:var(--black);border-top:1px solid #ccc}
+.booking-section{max-width:1140px;margin:0 auto 5rem;padding:0}
+.booking-section h2{color:var(--black);margin-bottom:1.2rem}
+.calendly-inline-widget{width:100%;min-width:320px;height:700px;border:1px solid #c0bbb5;background:#fff;overflow:hidden}
 .contact-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem}
 .contact-left .sec-label{color:#6a6a6a}
 .contact-left .sec-label::before{background:#999}
 .contact-left h2{color:var(--black)}
 .contact-left p{color:#555;font-size:0.88rem;line-height:1.8;margin-top:1.3rem;margin-bottom:1.6rem}
+.form-intro{color:#555;font-size:0.88rem;line-height:1.7;margin-bottom:0.25rem}
 .cd{margin-bottom:0.75rem}
 .cdl{font-family:'Barlow Condensed',sans-serif;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:#6a6a6a;margin-bottom:0.1rem}
 .cdv{font-size:0.86rem;color:var(--black)}
@@ -272,6 +276,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:1.6rem
   .pstep{border-bottom:1px solid var(--border)}
   .pstep:nth-child(even){border-right:none}
   .pstep:nth-child(3),.pstep:last-child{border-bottom:none}
+  .booking-section{margin-bottom:3rem}
+  .calendly-inline-widget{height:850px}
   .contact-grid{grid-template-columns:1fr;gap:3rem}
   .form-row{grid-template-columns:1fr}
   footer{flex-direction:column;align-items:flex-start;gap:1rem}
@@ -342,6 +348,11 @@ h2{font-weight:700}
   </div>
 </section>
 <section id="contact" class="contact-section">
+  <section class="booking-section" aria-labelledby="booking-heading">
+    <p class="sec-label">Free 30-Min Consult</p>
+    <h2 id="booking-heading">Pick a time that suits you</h2>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/amberpatecoaching/30min" role="region" aria-label="Calendly booking calendar"></div>
+  </section>
   <div class="contact-grid">
     <div class="contact-left">
       <p class="sec-label">Get In Touch</p>
@@ -353,6 +364,7 @@ h2{font-weight:700}
       <div class="cd"><div class="cdl">Based In</div><div class="cdv">Adelaide, South Australia · Clients Worldwide</div></div>
     </div>
     <form class="cform" onsubmit="handleSubmit(event)" action="https://formspree.io/f/xwvzknja" method="POST">
+      <p class="form-intro">Prefer to send a message? Use the form below.</p>
       <div class="form-row">
         <div class="fg"><label for="fn">First Name</label><input type="text" id="fn" name="first_name" placeholder="Your first name" required></div>
         <div class="fg"><label for="ln">Last Name</label><input type="text" id="ln" name="last_name" placeholder="Your last name" required></div>
@@ -416,5 +428,12 @@ async function handleSubmit(e){
   }
 }
 </script>
+<script>
+window.addEventListener('message', (event) => {
+  if (event.origin !== 'https://calendly.com' || event.data?.event !== 'calendly.event_scheduled') return;
+  if (typeof gtag === 'function') gtag('event', 'consult_booked');
+});
+</script>
+<script async src="https://assets.calendly.com/assets/external/widget.js"></script>
 </body>
 </html>
